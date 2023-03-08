@@ -48,6 +48,13 @@ public class EmployeeController {
         //      return new ResponseEntity<>(optionalEmployee.get(), HttpStatus.OK);
     }
 
+    @PostMapping
+    public Employee createEmployee(@RequestBody Employee employee) {
+        this.employeeList.add(employee);
+        return employee;
+    }
+
+
 
 }
 
