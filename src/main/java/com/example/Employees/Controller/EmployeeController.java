@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/Api")
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:3000")
 public class EmployeeController {
 
     List<Employee> employeeList = new ArrayList<>(
