@@ -2,6 +2,7 @@ package com.example.Employees.controller;
 
 import com.example.Employees.models.Employee;
 import com.example.Employees.repositories.EmployeeInMemoryRepository;
+import com.example.Employees.repositories.IEmployeeRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,9 +16,9 @@ public class EmployeeController {
 
 
 
-    private final EmployeeInMemoryRepository employeeInMemoryRepository;
+    private final IEmployeeRepository employeeInMemoryRepository;
 
-    public EmployeeController(EmployeeInMemoryRepository employeeInMemoryRepository) {
+    public EmployeeController(IEmployeeRepository employeeInMemoryRepository) {
         this.employeeInMemoryRepository = employeeInMemoryRepository;
     } // Ineccion de dependencias por constructor
 
