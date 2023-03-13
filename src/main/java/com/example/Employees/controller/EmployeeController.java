@@ -1,6 +1,7 @@
-package com.example.Employees.Controller;
+package com.example.Employees.controller;
 
 import com.example.Employees.models.Employee;
+import com.example.Employees.repositories.EmployeeRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,9 +11,12 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/Api")
+@RequestMapping("/api")
 @CrossOrigin("*")
 public class EmployeeController {
+
+
+    private final EmployeeRepository employeeRepository = new EmployeeRepository();
 
     List<Employee> employeeList = new ArrayList<>(
             List.of(new Employee("badr", "badrkahouaji26@gmail.com", "badr151")
@@ -20,18 +24,10 @@ public class EmployeeController {
     );
 
 
-    @GetMapping
-    public String employee() {
-        System.out.println("good");
-        return "ok";
-    }
-
     @GetMapping("/employees")
     public List<Employee> getEmployees() {
-        return this.employeeList;
+        return this.employeeRepository.findAll();
     }
-
-    ;
 
 
     @GetMapping("/{id}")
