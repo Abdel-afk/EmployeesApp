@@ -42,11 +42,7 @@ public class EmployeeController {
 
     @DeleteMapping("{id}")
     public Employee deleteEmployee(@PathVariable UUID id) {
-        var employee = this.employeeList.stream()
-                .filter(item -> item.getId().equals(id))
-                .findFirst().get();
-        this.employeeList.remove(employee);
-        return employee;
+        return this.employeeRepository.deleteById(id);
     }
 
     @PutMapping("{id}")

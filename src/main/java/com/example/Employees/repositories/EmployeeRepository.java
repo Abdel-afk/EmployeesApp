@@ -30,8 +30,10 @@ public class EmployeeRepository {
     }
 
     public Employee deleteById(UUID id) {
-        return this.employeeList.stream()
+        var employee = this.employeeList.stream()
                 .filter(item -> item.getId().equals(id))
                 .findFirst().get();
+        this.employeeList.remove(employee);
+        return employee;
     }
 }
