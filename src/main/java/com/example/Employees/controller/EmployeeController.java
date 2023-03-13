@@ -2,8 +2,6 @@ package com.example.Employees.controller;
 
 import com.example.Employees.models.Employee;
 import com.example.Employees.repositories.EmployeeRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -16,13 +14,18 @@ import java.util.UUID;
 public class EmployeeController {
 
 
-    private final EmployeeRepository employeeRepository = new EmployeeRepository();
+
+    private final EmployeeRepository employeeRepository;
+
+    public EmployeeController(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    } // Ineccion de dependencias por constructor
+
 
     List<Employee> employeeList = new ArrayList<>(
             List.of(new Employee("badr", "badrkahouaji26@gmail.com", "badr151")
                     , new Employee("aneeb", "aneebch@gmail.com", "aneebch"))
     );
-
 
     @GetMapping("/employees")
     public List<Employee> getEmployees() {
