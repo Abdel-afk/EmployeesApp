@@ -47,18 +47,8 @@ public class EmployeeController {
 
     @PutMapping("{id}")
     public Employee updateById(@PathVariable UUID id, @RequestBody Employee employee) {
-
-        for (Employee item : this.employeeList){
-            if (item.getId().equals(id)){
-                item.setName(employee.getName());
-                item.setUsername(employee.getUsername());
-                item.setEmail(employee.getEmail());
-                return item;
-            }
-        }
-        return null;
+        return this.employeeRepository.update(id, employee);
     }
-
 
 }
 
