@@ -31,23 +31,13 @@ public class EmployeeController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> getById(@PathVariable UUID id) {
-        for (Employee employee : this.employeeList) {
-            if (employee.getId().equals(id)) return new ResponseEntity<>(employee, HttpStatus.OK);
-        }
-        return ResponseEntity.notFound().build();
-
-        //       var optionalEmployee = this.employeeList.stream()
-        //               .filter(item -> item.getId().equals(id))
-        //               .findFirst();
-        //      if (optionalEmployee.isEmpty()) return ResponseEntity.notFound().build();
-        //      return new ResponseEntity<>(optionalEmployee.get(), HttpStatus.OK);
+    public Employee getById(@PathVariable UUID id) {
+        return this.employeeRepository.findById(id);
     }
 
     @PostMapping
     public Employee createEmployee(@RequestBody Employee employee) {
-        this.employeeList.add(employee);
-        return employee;
+        return this.employeeRepository.save(employee);
     }
 
     @DeleteMapping("{id}")

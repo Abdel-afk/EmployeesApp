@@ -4,6 +4,7 @@ import com.example.Employees.models.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class EmployeeRepository {
 
@@ -15,5 +16,22 @@ public class EmployeeRepository {
 
     public List<Employee> findAll() {
         return this.employeeList;
+    }
+
+    public Employee findById(UUID id) {
+        return this.employeeList.stream()
+                .filter(item -> item.getId().equals(id))
+                .findFirst().get();
+    }
+
+    public Employee save(Employee employee) {
+        this.employeeList.add(employee);
+        return employee;
+    }
+
+    public Employee deleteById(UUID id) {
+        return this.employeeList.stream()
+                .filter(item -> item.getId().equals(id))
+                .findFirst().get();
     }
 }
