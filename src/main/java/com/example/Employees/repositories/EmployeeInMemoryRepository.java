@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public class EmployeeRepository {
+public class EmployeeInMemoryRepository implements IEmployeeRepository {
 
     List<Employee> employeeList = new ArrayList<>(
             List.of(new Employee("badr", "badrkahouaji26@gmail.com", "badr151")
@@ -16,21 +16,25 @@ public class EmployeeRepository {
                     new Employee("anish", "anish@gmail.com", "anish"))
     );
 
+    @Override
     public List<Employee> findAll() {
         return this.employeeList;
     }
 
+    @Override
     public Employee findById(UUID id) {
         return this.employeeList.stream()
                 .filter(item -> item.getId().equals(id))
                 .findFirst().get();
     }
 
+    @Override
     public Employee save(Employee employee) {
         this.employeeList.add(employee);
         return employee;
     }
 
+    @Override
     public Employee deleteById(UUID id) {
         var employee = this.employeeList.stream()
                 .filter(item -> item.getId().equals(id))
@@ -39,6 +43,7 @@ public class EmployeeRepository {
         return employee;
     }
 
+    @Override
     public Employee update(UUID id, Employee employee) {
         for (Employee item : this.employeeList){
             if (item.getId().equals(id)){

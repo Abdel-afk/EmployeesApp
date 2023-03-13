@@ -1,7 +1,7 @@
 package com.example.Employees.controller;
 
 import com.example.Employees.models.Employee;
-import com.example.Employees.repositories.EmployeeRepository;
+import com.example.Employees.repositories.EmployeeInMemoryRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,10 +15,10 @@ public class EmployeeController {
 
 
 
-    private final EmployeeRepository employeeRepository;
+    private final EmployeeInMemoryRepository employeeInMemoryRepository;
 
-    public EmployeeController(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    public EmployeeController(EmployeeInMemoryRepository employeeInMemoryRepository) {
+        this.employeeInMemoryRepository = employeeInMemoryRepository;
     } // Ineccion de dependencias por constructor
 
 
@@ -29,28 +29,28 @@ public class EmployeeController {
 
     @GetMapping("/employees")
     public List<Employee> getEmployees() {
-        return this.employeeRepository.findAll();
+        return this.employeeInMemoryRepository.findAll();
     }
 
 
     @GetMapping("/{id}")
     public Employee getById(@PathVariable UUID id) {
-        return this.employeeRepository.findById(id);
+        return this.employeeInMemoryRepository.findById(id);
     }
 
     @PostMapping
     public Employee createEmployee(@RequestBody Employee employee) {
-        return this.employeeRepository.save(employee);
+        return this.employeeInMemoryRepository.save(employee);
     }
 
     @DeleteMapping("{id}")
     public Employee deleteEmployee(@PathVariable UUID id) {
-        return this.employeeRepository.deleteById(id);
+        return this.employeeInMemoryRepository.deleteById(id);
     }
 
     @PutMapping("{id}")
     public Employee updateById(@PathVariable UUID id, @RequestBody Employee employee) {
-        return this.employeeRepository.update(id, employee);
+        return this.employeeInMemoryRepository.update(id, employee);
     }
 
 }
