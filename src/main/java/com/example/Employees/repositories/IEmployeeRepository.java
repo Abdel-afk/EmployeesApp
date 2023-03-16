@@ -1,18 +1,20 @@
 package com.example.Employees.repositories;
 
 import com.example.Employees.models.Employee;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 
 import java.util.List;
 import java.util.UUID;
 
-public interface IEmployeeRepository {
+public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
     List<Employee> findAll();
 
-    Employee findById(UUID id);
+    Employee findById(int id);
 
     Employee save(Employee employee);
 
-    Employee deleteById(UUID id);
+    Employee deleteById(int id);
 
-    Employee update(UUID id, Employee employee);
+    //Employee update(int id, Employee employee);
 }

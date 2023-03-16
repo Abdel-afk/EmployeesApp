@@ -1,10 +1,18 @@
 package com.example.Employees.models;
 
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.util.UUID;
 
+@Entity
 public class Employee {
-    private UUID id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private int id;
 
     private String name;
 
@@ -12,22 +20,23 @@ public class Employee {
 
     private String username;
 
-    public Employee(String name, String email, String username){
-        this.id = UUID.randomUUID();
+    /*public Employee(String name, String email, String username){
+        this.id = int.randomUUID();
         this.name = name;
         this.email = email;
         this.username = username;
-    }
+    }*/
 
     public Employee() {
-        this.id = UUID.randomUUID();
+       /* this.id = int.randomUUID();*/
+        super();
     }
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
 
