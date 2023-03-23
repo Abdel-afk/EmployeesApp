@@ -1,8 +1,8 @@
 package com.example.Employees.controller;
 
 import com.example.Employees.models.Employee;
-//import com.example.Employees.repositories.EmployeeInMemoryRepository;
 import com.example.Employees.repositories.IEmployeeRepository;
+import com.example.Employees.services.EmployeeServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,58 +22,33 @@ public class EmployeeController {
         return "check";
     }
 @Autowired
-    private final IEmployeeRepository employeeInMemoryRepository;
+    IEmployeeRepository employeeInMemoryRepository;
 
-    public EmployeeController(IEmployeeRepository employeeInMemoryRepository) {
-        this.employeeInMemoryRepository = employeeInMemoryRepository;
-    } // Ineccion de dependencias por constructor
-
-
-    /*List<Employee> employeeList = new ArrayList<>(
-            List.of(new Employee("badr", "badrkahouaji26@gmail.com", "badr151")
-                    , new Employee("aneeb", "aneebch@gmail.com", "aneebch"))
-    );*/
+    @Autowired
+    EmployeeServices employeeServices;
 
     @GetMapping("/employees")
     public List<Employee> getEmployees() {
-        return this.employeeInMemoryRepository.findAll();
+        return this.employeeServices.getEmployees();
     }
 
 
     @GetMapping("/employees/{id}")
     public Employee getById(@PathVariable int id) {
-        return this.employeeInMemoryRepository.findById(id);
+        return this.employeeServices.getById(id);
     }
-
-   /* @PostMapping
-    public Employee createEmployee(@RequestBody Employee employee) {
-        return this.employeeInMemoryRepository.save(employee);
-    }*/
 
     @DeleteMapping("/employees/{id}")
     public Employee deleteEmployee(@PathVariable int id) {
-        return this.employeeInMemoryRepository.deleteById(id);
+        return this.employeeServices.deleteEmployee(id);
     }
 
     @PutMapping("/employees/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable int id, @RequestBody Employee updatedEmployee) {
-        Optional<Employee> optionalEmployee = Optional.ofNullable(employeeInMemoryRepository.findById(id));
-
-        if (optionalEmployee.isPresent()) {
-            Employee employee = optionalEmployee.get();
-
-            employee.setName(updatedEmployee.getName());
-            employee.setEmail(updatedEmployee.getEmail());
-            employee.setUsername(updatedEmployee.getUsername());
-
-            employeeInMemoryRepository.save(employee);
-
-            return ResponseEntity.ok(employee);
-        } else {
-            return ResponseEntity.notFound().build();}
+        return this.employeeServices.updateEmployee(id,updatedEmployee);
         }
     @PostMapping("/employees")
     public void save(@RequestBody Employee employee){
-        employeeInMemoryRepository.save(employee);
+        employeeServices.save(employee);
     }
 }
