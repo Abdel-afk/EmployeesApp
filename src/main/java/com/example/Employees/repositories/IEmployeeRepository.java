@@ -15,6 +15,4 @@ public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
     Employee save(Employee employee);
 
     Employee deleteById(int id);
-
-    //Employee update(int id, Employee employee);
 }

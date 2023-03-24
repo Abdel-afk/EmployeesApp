@@ -44,7 +44,6 @@ public class EmployeeServices {
         } else {
             return ResponseEntity.notFound().build();}
     }
-    public void save(Employee employee){
-        employeeInMemoryRepository.save(employee);
+    public void save(Employee employee){employeeInMemoryRepository.save(employee);
     }
 }

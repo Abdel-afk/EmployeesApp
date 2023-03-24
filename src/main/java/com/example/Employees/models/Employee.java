@@ -20,15 +20,7 @@ public class Employee {
 
     private String username;
 
-    /*public Employee(String name, String email, String username){
-        this.id = int.randomUUID();
-        this.name = name;
-        this.email = email;
-        this.username = username;
-    }*/
-
     public Employee() {
-       /* this.id = int.randomUUID();*/
         super();
     }
 
